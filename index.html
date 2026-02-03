@@ -1,21 +1,61 @@
-<html lang="en">
+<!doctype html>
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Vokabeltrainer</title>
+    <title>Tutorix</title>
   </head>
   <body>
-    <nav>
-      <div class="nav-container">
-        <h1>Kopfrechnen Meister</h1>
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link active">Home</a></li>
-          <li><a href="#übungen" class="nav-link">Übungen</a></li>
-          <li><a href="#quiz" class="nav-link">Quiz</a></li>
-          <li><a href="#pdf" class="nav-link">PDF</a></li>
-        </ul>
-      </div>
+    <nav class="nav-island">
+      <a href="/index.html" class="nav-logo">Tutorix</a>
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#mathe" class="nav-link">Mathe</a></li>
+        <li><a href="#duolingo" class="nav-link">Duolingo</a></li>
+      </ul>
     </nav>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+          <h1>Lerne schlauer, nicht härter</h1>
+          <p>Dein persönlicher Lernbegleiter für jedes Fach</p>
+          <a href="#mathe" class="hero-btn">Los geht's</a>
+        </div>
+        <a href="#mathe" class="scroll-hint">
+          <span></span>
+        </a>
+      </section>
+
+      <section class="subject-section" id="mathe">
+        <div class="subject-bg mathe-bg"></div>
+        <div class="subject-content">
+          <h2>Mathe</h2>
+          <p>Formeln, Funktionen & mehr</p>
+          <a href="/mathepeter" class="subject-btn">Zum Kurs</a>
+        </div>
+      </section>
+
+      <section class="subject-section" id="duolingo">
+        <div class="subject-bg duolingo-bg"></div>
+        <div class="subject-content">
+          <h2>Sprachen</h2>
+          <p>Mit Duolingo lernen</p>
+          <a href="/trainer" class="subject-btn">Zum Kurs</a>
+        </div>
+      </section>
+
+      <footer>
+        <p>Tutorix &copy; <span id="year"></span></p>
+        <div class="footer-links">
+          <a href="/impressum.html">Impressum</a>
+          <a href="/agb.html">AGB</a>
+        </div>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
   </body>
 </html>

@@ -1,0 +1,17 @@
+[
+  {
+    "type": "Math Teacher",
+    "moods": ["Strict", "Encouraging", "Friendly"],
+    "avatar": "🧮"
+  },
+  {
+    "type": "Science Teacher",
+    "moods": ["Curious", "Friendly", "Funny"],
+    "avatar": "🔬"
+  },
+  {
+    "type": "Coach",
+    "moods": ["Motivating", "Strict", "Supportive"],
+    "avatar": "🏃‍♂️"
+  }
+]

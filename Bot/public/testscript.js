@@ -1,6 +1,4 @@
 let selectedContext = [];
-let currentAvatarIndex = 0;
-const avatars = ['teacher1.png', 'robot.png', 'cat.png'];
 
 function setContext(context) {
   if (!selectedContext.includes(context)) {
@@ -17,6 +15,7 @@ async function sendPrompt() {
   const correctAnswer = document.getElementById("correctAnswer").value;
   const topic = document.getElementById("topic")?.value || "";
   const failCount = parseInt(document.getElementById("failCount")?.value || "0", 10);
+  const difficulty = document.getElementById("difficulty")?.value || "medium";
   const teacherType = document.getElementById("teacherType").value;
   const teacherMood = document.getElementById("teacherMood").value;
 
@@ -27,6 +26,7 @@ async function sendPrompt() {
     topic,
     context: selectedContext,
     failCount,
+    difficulty,
     teacherType,
     teacherMood
   };
@@ -45,32 +45,4 @@ async function sendPrompt() {
     console.error("Error sending prompt:", err);
     document.getElementById("output").textContent = "Error sending prompt to AI.";
   }
-}
-
-function openSettings() {
-  const overlay = document.getElementById('settingsOverlay');
-  overlay.classList.toggle('active');
-  updateCarousel();
-}
-
-function rotateCarousel(direction) {
-  if (direction === 'left') {
-    currentAvatarIndex = (currentAvatarIndex - 1 + avatars.length) % avatars.length;
-  } else {
-    currentAvatarIndex = (currentAvatarIndex + 1) % avatars.length;
-  }
-  updateCarousel();
-}
-
-function updateCarousel() {
-  const carousel = document.getElementById('avatarCarousel');
-  const rotation = -currentAvatarIndex * 120;
-  carousel.style.transform = `rotateY(${rotation}deg)`;
-  
-  document.getElementById('avatarImg').src = 'avatars/' + avatars[currentAvatarIndex];
-}
-
-function saveSettings() {
-  console.log('Einstellungen gespeichert - Avatar: ' + avatars[currentAvatarIndex]);
-  openSettings();
 }

@@ -1,70 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Local Ollama Web Prompt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Local Ollama Web Prompt</h2>
+  <div class="app">
 
-<div class="input-group">
-  <label for="question">Question:</label>
-  <input id="question" placeholder="Enter question">
-</div>
+    <!-- TASK PANEL -->
+    <section class="task-panel">
+      <h2>Task</h2>
+      <div class="task-content">
+        Waiting for task...
+      </div>
+    </section>
 
-<div class="input-group">
-  <label for="givenAnswer">Student's Answer:</label>
-  <input id="givenAnswer" placeholder="Enter student's answer">
-</div>
+    <!-- AI PANEL -->
+    <section class="ai-panel">
+      <div class="ai-header">
+        <img src="avatars/teacher1.png" class="avatar" id="avatarImg">
+        <button class="gear-btn" onclick="openSettings()">⚙</button>
+      </div>
+      <div class="ai-bubble" id="aiBubble">
+        AI ready.<br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
+        <!-- Test content -->
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
+      </div>
+    </section>
 
-<div class="input-group">
-  <label for="correctAnswer">Correct Answer:</label>
-  <input id="correctAnswer" placeholder="Enter correct answer">
-</div>
+  </div>
 
-<div class="input-group">
-  <label for="topic">Topic (optional):</label>
-  <input id="topic" placeholder="Enter topic">
-</div>
+  <!-- SETTINGS MODAL -->
+  <div class="overlay" id="settingsOverlay">
+    <div class="settings-box">
+      <div class="settings-header">
+        <h3>Teacher Settings</h3>
+        <button onclick="openSettings()">✖</button>
+      </div>
 
-<div class="input-group">
-  <label for="failCount">Fails:</label>
-  <input id="failCount" type="number" placeholder="Number of fails">
-</div>
+      <label>Avatar</label>
+      <div class="avatar-carousel-container">
+        <button class="carousel-btn" onclick="rotateCarousel('left')">❮</button>
+        <div id="avatarCarousel">
+          <img src="avatars/teacher1.png" class="avatar" id="avatarCarouselImg" style="width: 80px; height: 80px;">
+        </div>
+        <button class="carousel-btn" onclick="rotateCarousel('right')">❯</button>
+      </div>
 
-<div class="input-group">
-  <label for="difficulty">Difficulty:</label>
-  <select id="difficulty">
-    <option value="easy">Easy</option>
-    <option value="medium" selected>Medium</option>
-    <option value="hard">Hard</option>
-  </select>
-</div>
+      <label>Teacher Mood</label>
+      <select id="teacherMood">
+        <option value="friendly">Friendly</option>
+        <option value="strict">Strict</option>
+        <option value="funny">Funny</option>
+      </select>
 
-<div class="input-group">
-  <label for="teacherType">Teacher Type:</label>
-  <select id="teacherType">
-    <option value="math">Math</option>
-    <option value="science">Science</option>
-    <option value="history">History</option>
-  </select>
-</div>
+      <button class="save-btn" onclick="saveSettings()">Save</button>
+    </div>
+  </div>
 
-<div class="input-group">
-  <label for="teacherMood">Teacher Mood:</label>
-  <select id="teacherMood">
-    <option value="friendly" selected>Friendly</option>
-    <option value="strict">Strict</option>
-    <option value="funny">Funny</option>
-  </select>
-</div>
-
-<button onclick="sendPrompt()">Run</button>
-
-<pre id="output"></pre>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

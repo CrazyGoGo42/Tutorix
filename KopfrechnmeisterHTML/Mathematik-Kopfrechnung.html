@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Kopfrechnung – Mathematik Übungen</title>
+    <link rel="stylesheet" href="Mathematik-Kopfrechnung.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <h1>🧮 Kopfrechnen Meister</h1>
+			<ul class="nav-menu">
+				<li><a href="#home" class="nav-link active">Home</a></li>
+				<li><a href="#klasse-auswahl" class="nav-link">Klassenauswahl</a></li>
+				<li><a href="#exercise-section" class="nav-link">Übungen</a></li>
+				<li><a href="#quiz-section" class="nav-link">Quiz</a></li>
+				<li><a href="#pdf-section" class="nav-link">PDF</a></li>
+			</ul>
+        </div>
+    </nav>
+
+    <!-- Hauptcontainer -->
+    <main class="main-container">
+        <!-- Willkommensbereich -->
+        <section  class="welcome-section" id="home">
+            <div class="welcome-card">
+                <h2>Willkommen beim Kopfrechnen-Trainer!</h2>
+                <p>Verbessere deine Mathe-Fähigkeiten mit personalisierten Übungen für Klasse 1 bis 5.</p>
+            </div>
+        </section>
+
+        <!-- Klassenauswahl -->
+        <section class="selection-section" id="klasse-auswahl">
+            <h2 class="section-title">1. Wähle deine Klassenstufe</h2>
+            <div class="klassen-grid">
+				<!-- Klasse1 -->
+                <div class="klasse-card" data-klasse="1">
+                    <div class="klasse-header">
+                        <span class="klasse-nummer">1</span>
+                        <h3>Klasse 1</h3>
+                    </div>
+                    <div class="klasse-beispiele">
+                        <p><strong>Beispiele:</strong></p>
+                        <p>5 + 3 = 8</p>
+                        <p>7 - 2 = 5</p>
+                        <p>Zahlen bis 10</p>
+                    </div>
+                    <button class="klasse-btn" onclick="selectKlasse(1)">Auswählen</button>
+                </div>
+
+				<!-- Klasse2 -->
+                <div class="klasse-card" data-klasse="2">
+                    <div class="klasse-header">
+                        <span class="klasse-nummer">2</span>
+                        <h3>Klasse 2</h3>
+                    </div>
+                    <div class="klasse-beispiele">
+                        <p><strong>Beispiele:</strong></p>
+                        <p>12 + 8 = 20</p>
+                        <p>15 - 7 = 8</p>
+                        <p>Zahlen bis 20</p>
+                    </div>
+                    <button class="klasse-btn" onclick="selectKlasse(2)">Auswählen</button>
+                </div>
+
+				<!-- Klasse3 -->
+                <div class="klasse-card" data-klasse="3">
+                    <div class="klasse-header">
+                        <span class="klasse-nummer">3</span>
+                        <h3>Klasse 3</h3>
+                    </div>
+                    <div class="klasse-beispiele">
+                        <p><strong>Beispiele:</strong></p>
+                        <p>25 + 17 = 42</p>
+                        <p>6 × 4 = 24</p>
+                        <p>Zahlen bis 100</p>
+                    </div>
+                    <button class="klasse-btn" onclick="selectKlasse(3)">Auswählen</button>
+                </div>
+
+				<!-- Klasse4 -->
+                <div class="klasse-card" data-klasse="4">
+                    <div class="klasse-header">
+                        <span class="klasse-nummer">4</span>
+                        <h3>Klasse 4</h3>
+                    </div>
+                    <div class="klasse-beispiele">
+                        <p><strong>Beispiele:</strong></p>
+                        <p>128 + 75 = 203</p>
+                        <p>48 ÷ 6 = 8</p>
+                        <p>Zahlen bis 1000</p>
+                    </div>
+                    <button class="klasse-btn" onclick="selectKlasse(4)">Auswählen</button>
+                </div>
+
+				<!-- Klasse5 -->
+                <div class="klasse-card" data-klasse="5">
+                    <div class="klasse-header">
+                        <span class="klasse-nummer">5</span>
+                        <h3>Klasse 5</h3>
+                    </div>
+                    <div class="klasse-beispiele">
+                        <p><strong>Beispiele:</strong></p>
+                        <p>235 + 178 = 413</p>
+                        <p>72 ÷ 9 - 1 = 7</p>
+                        <p>Gemischte Aufgaben</p>
+                    </div>
+                    <button class="klasse-btn" onclick="selectKlasse(5)">Auswählen</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aktive Übung (wird per JS angezeigt) -->
+        <section class="exercise-section" id="exercise-section" style="display: none;">
+            <div class="exercise-header">
+                <h2 id="exercise-title">Übungen für Klasse <span id="current-klasse"></span></h2>
+                <div class="exercise-controls">
+                    <button class="control-btn" onclick="generateNewTasks()">
+                        <span>🔄</span> Neue Aufgaben
+                    </button>
+                    <button class="control-btn secondary" onclick="checkAllAnswers()">
+                        <span>✓</span> Alle prüfen
+                    </button>
+                    <button class="control-btn secondary" onclick="showAllSolutions()">
+                        <span>👁️</span> Lösungen zeigen
+                    </button>
+                    <button class="control-btn pdf-btn" onclick="generatePDF()">
+                        <span>📄</span> PDF erstellen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fortschrittsanzeige -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-stats">
+                    <span id="progress-text">0/0 Aufgaben</span>
+                    <span id="score-text">Punkte: 0</span>
+                </div>
+            </div>
+
+            <!-- Aufgabencontainer -->
+            <div class="tasks-container" id="tasks-container">
+                <!-- Aufgaben werden hier eingefügt -->
+            </div>
+            <!-- Statistik -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-value" id="correct-count">0</div>
+                    <div class="stat-label">Richtig</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="wrong-count">0</div>
+                    <div class="stat-label">Falsch</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="attempts-count">0</div>
+                    <div class="stat-label">Versuche</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="success-rate">0%</div>
+                    <div class="stat-label">Erfolg</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Bereich -->
+        <section class="quiz-section" id="quiz-section">
+            <h2 class="section-title">2. Zeitgesteuertes Quiz</h2>
+            <div class="quiz-card">
+                <div class="quiz-header">
+                    <h3>Kopfrechen-Quiz</h3>
+                    <div class="timer-display">
+                        <span>⏱️</span>
+                        <span id="quiz-timer">00:15</span>
+                    </div>
+                </div>
+                <div class="quiz-description">
+                    <p>Teste dein Wissen unter Zeitdruck! Du hast 5 Minuten für 10 Aufgaben.</p>
+                    <ul class="quiz-rules">
+                        <li>✓ 10 gemischte Aufgaben</li>
+                        <li>✓ 15 Minuten Zeitlimit</li>
+                        <li>✓ Automatische Auswertung</li>
+                        <li>✓ Note von 1-6</li>
+                    </ul>
+                </div>
+                <div class="quiz-controls">
+                    <button class="quiz-start-btn" onclick="startQuiz()">Quiz starten</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PDF Bereich -->
+        <section class="pdf-section" id="pdf-section">
+            <h2 class="section-title">3. PDF-Downloads</h2>
+            <div class="pdf-grid">
+                <div class="pdf-card">
+                    <div class="pdf-icon">📝</div>
+                    <h3>Übungsblatt</h3>
+                    <p>Erstelle ein personalisiertes Übungsblatt mit deinen Aufgaben.</p>
+                    <button class="pdf-download-btn" onclick="generateExercisePDF()">
+                        Übungsblatt erstellen
+                    </button>
+                </div>
+                <div class="pdf-card">
+                    <div class="pdf-icon">🧾</div>
+                    <h3>Lösungsblatt</h3>
+                    <p>Lade die Lösungen zu deinen Aufgaben als PDF herunter.</p>
+                    <button class="pdf-download-btn" onclick="generateSolutionPDF()">
+                        Lösungsblatt herunterladen
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2024 Kopfrechnen Meister | Mathematik Übungen für Klasse 1-5</p>
+            <p class="footer-info">Entwickelt für bessere Mathe-Fähigkeiten</p>
+        </div>
+    </footer>
+
+    <script src="Mathematik-Kopfrechnung.js"></script>
+</body>
+</html>

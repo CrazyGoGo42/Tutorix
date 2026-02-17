@@ -379,7 +379,7 @@ function showQuestion() {
         )
         .join("")}
     </div>
-    <button class="quiz-check-btn" id="checkAnswer" disabled>Überprüfen</button>
+    <button class="quiz-check-btn" id="checkAnswer" disabled>Prüfen</button>
   `;
 
   const options = quizContent.querySelectorAll(".quiz-option");
@@ -414,23 +414,12 @@ function checkAnswer(selected, correct, options) {
 
   if (isCorrect) {
     currentQuiz.correctAnswers++;
-    showFeedback(true);
   } else {
     currentQuiz.hearts--;
     updateQuizUI();
-    showFeedback(false, correct);
-
-    if (currentQuiz.hearts <= 0) {
-      setTimeout(() => endQuiz(false), 1500);
-      return;
-    }
   }
 
-  setTimeout(() => {
-    currentQuiz.currentIndex++;
-    updateQuizUI();
-    showQuestion();
-  }, 1500);
+  showFeedback(isCorrect, isCorrect ? null : correct);
 }
 
 function showFeedback(isCorrect, correctAnswer = null) {
@@ -441,17 +430,35 @@ function showFeedback(isCorrect, correctAnswer = null) {
   feedback.className = `quiz-feedback ${isCorrect ? "correct" : "wrong"}`;
 
   if (isCorrect) {
-    feedback.innerHTML = `<span class="feedback-title">Richtig!</span>`;
+    feedback.innerHTML = `
+      <span class="feedback-title">Richtig!</span>
+      <button class="feedback-weiter-btn">Weiter</button>
+    `;
   } else {
     feedback.innerHTML = `
       <span class="feedback-title">Falsch!</span>
       <span class="feedback-answer">Richtige Antwort: <strong>${correctAnswer}</strong></span>
+      <button class="feedback-weiter-btn">Weiter</button>
     `;
   }
 
   quizView.appendChild(feedback);
 
-  setTimeout(() => feedback.remove(), 1400);
+  const weiterBtn = feedback.querySelector(".feedback-weiter-btn");
+  weiterBtn.addEventListener("click", () => {
+    feedback.remove();
+
+    // Check if quiz should end (no hearts left)
+    if (currentQuiz.hearts <= 0) {
+      endQuiz(false);
+      return;
+    }
+
+    // Move to next question
+    currentQuiz.currentIndex++;
+    updateQuizUI();
+    showQuestion();
+  });
 }
 // #endregion
 

@@ -566,6 +566,34 @@ main {
   font-weight: 700;
 }
 
+.feedback-weiter-btn {
+  margin-top: 0.8rem;
+  padding: 0.8rem 2rem;
+  background: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-feedback.correct .feedback-weiter-btn {
+  color: var(--dark-green);
+}
+
+.quiz-feedback.correct .feedback-weiter-btn:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.quiz-feedback.wrong .feedback-weiter-btn {
+  color: #d32f2f;
+}
+
+.quiz-feedback.wrong .feedback-weiter-btn:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
 /* ===== FOOTER ===== */
 footer {
   padding: 2rem;

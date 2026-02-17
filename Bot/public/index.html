@@ -4,37 +4,71 @@
   <meta charset="UTF-8">
   <title>Local Ollama Web Prompt</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="app">
-
     <!-- TASK PANEL -->
     <section class="task-panel">
       <h2>Task</h2>
-      <div class="task-content">
-        Waiting for task...
+      
+      <div class="input-group">
+        <label for="question">Question:</label>
+        <input id="question" placeholder="Enter question">
       </div>
+
+      <div class="input-group">
+        <label for="givenAnswer">Student's Answer:</label>
+        <input id="givenAnswer" placeholder="Enter student's answer">
+      </div>
+
+      <div class="input-group">
+        <label for="correctAnswer">Correct Answer:</label>
+        <input id="correctAnswer" placeholder="Enter correct answer">
+      </div>
+
+      <div class="input-group">
+        <label for="topic">Topic (optional):</label>
+        <input id="topic" placeholder="Enter topic">
+      </div>
+
+      <div class="input-group">
+        <label for="failCount">Fails:</label>
+        <input id="failCount" type="number" placeholder="Number of fails">
+      </div>
+
+      <div class="input-group">
+        <label for="teacherType">Teacher Type:</label>
+        <select id="teacherType">
+          <option value="math">Math</option>
+          <option value="science">Science</option>
+          <option value="history">History</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="teacherMood">Teacher Mood:</label>
+        <select id="teacherMood">
+          <option value="friendly" selected>Friendly</option>
+          <option value="strict">Strict</option>
+          <option value="funny">Funny</option>
+        </select>
+      </div>
+
+      <button class="run-btn" onclick="sendPrompt()">Generate AI Response</button>
     </section>
 
     <!-- AI PANEL -->
     <section class="ai-panel">
       <div class="ai-header">
-        <img src="avatars/teacher1.png" class="avatar" id="avatarImg">
-        <button class="gear-btn" onclick="openSettings()">⚙</button>
+        <canvas id="avatarCanvas" class="avatar"></canvas>
       </div>
       <div class="ai-bubble" id="aiBubble">
         AI ready.<br>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
-        <!-- Test content -->
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
       </div>
+      <button class="gear-btn" onclick="openSettings()">⚙</button>
     </section>
-
   </div>
 
   <!-- SETTINGS MODAL -->
@@ -45,17 +79,16 @@
         <button onclick="openSettings()">✖</button>
       </div>
 
-      <label>Avatar</label>
-      <div class="avatar-carousel-container">
-        <button class="carousel-btn" onclick="rotateCarousel('left')">❮</button>
-        <div id="avatarCarousel">
-          <img src="avatars/teacher1.png" class="avatar" id="avatarCarouselImg" style="width: 80px; height: 80px;">
-        </div>
-        <button class="carousel-btn" onclick="rotateCarousel('right')">❯</button>
+      <label>Avatar Color</label>
+      <div class="color-buttons">
+        <button class="color-btn" data-color1="#0066ff" data-color2="#00ccff" style="background: linear-gradient(135deg, #0066ff, #00ccff);" title="Blau">Blau</button>
+        <button class="color-btn" data-color1="#ffcc00" data-color2="#ff6600" style="background: linear-gradient(135deg, #ffcc00, #ff6600);" title="Gelb">Gelb</button>
+        <button class="color-btn" data-color1="#00ff66" data-color2="#00cc99" style="background: linear-gradient(135deg, #00ff66, #00cc99);" title="Grün">Grün</button>
+        <button class="color-btn" data-color1="#ff0033" data-color2="#cc0066" style="background: linear-gradient(135deg, #ff0033, #cc0066);" title="Rot">Rot</button>
       </div>
 
       <label>Teacher Mood</label>
-      <select id="teacherMood">
+      <select id="settingsMood">
         <option value="friendly">Friendly</option>
         <option value="strict">Strict</option>
         <option value="funny">Funny</option>

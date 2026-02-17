@@ -16,7 +16,6 @@ app.post("/prompt", async (req, res) => {
     topic,
     context,
     failCount,
-    difficulty,
     teacherType,
     teacherMood
   } = req.body;
@@ -26,7 +25,7 @@ app.post("/prompt", async (req, res) => {
 You are a ${teacherMood || "friendly"} ${teacherType || "teacher"}.
 The student answered "${givenAnswer}" for "${question}"${topic ? ` (topic: ${topic})` : ""}.
 Correct answer: "${correctAnswer}".
-Student has failed ${failCount || 0} times. Difficulty: ${difficulty || "medium"}.
+Student has failed ${failCount || 0} times.
 Context: ${context?.join(", ") || "none"}.
 Give a short hint (2–3 words) that helps student improve.
 `;

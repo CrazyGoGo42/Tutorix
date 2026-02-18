@@ -201,12 +201,16 @@ main {
 .level-node.unlocked {
   background: var(--primary-green);
   color: var(--white);
-  box-shadow: 0 4px 0 var(--dark-green), 0 6px 20px rgba(88, 204, 2, 0.3);
+  box-shadow:
+    0 4px 0 var(--dark-green),
+    0 6px 20px rgba(88, 204, 2, 0.3);
 }
 
 .level-node.unlocked:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 0 var(--dark-green), 0 10px 30px rgba(88, 204, 2, 0.4);
+  box-shadow:
+    0 6px 0 var(--dark-green),
+    0 10px 30px rgba(88, 204, 2, 0.4);
 }
 
 .level-node.unlocked:active {
@@ -217,13 +221,27 @@ main {
 .level-node.current {
   background: var(--primary-green);
   color: var(--white);
-  box-shadow: 0 4px 0 var(--dark-green), 0 0 0 4px var(--very-light-green), 0 6px 20px rgba(88, 204, 2, 0.3);
+  box-shadow:
+    0 4px 0 var(--dark-green),
+    0 0 0 4px var(--very-light-green),
+    0 6px 20px rgba(88, 204, 2, 0.3);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 4px 0 var(--dark-green), 0 0 0 4px var(--very-light-green), 0 6px 20px rgba(88, 204, 2, 0.3); }
-  50% { box-shadow: 0 4px 0 var(--dark-green), 0 0 0 8px rgba(229, 247, 211, 0.5), 0 6px 30px rgba(88, 204, 2, 0.4); }
+  0%,
+  100% {
+    box-shadow:
+      0 4px 0 var(--dark-green),
+      0 0 0 4px var(--very-light-green),
+      0 6px 20px rgba(88, 204, 2, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 4px 0 var(--dark-green),
+      0 0 0 8px rgba(229, 247, 211, 0.5),
+      0 6px 30px rgba(88, 204, 2, 0.4);
+  }
 }
 
 .level-node.locked {
@@ -240,7 +258,7 @@ main {
 }
 
 .level-node.completed::after {
-  content: '✓';
+  content: "✓";
   position: absolute;
   bottom: -5px;
   right: -5px;
@@ -253,7 +271,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== LEVEL MODAL ===== */
@@ -283,8 +301,14 @@ main {
 }
 
 @keyframes modalIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-close {
@@ -733,5 +757,119 @@ footer {
   .nav-link {
     font-size: 0.8rem;
     padding: 0.4rem 0.6rem;
+  }
+}
+
+/* ===== HOME DUO-LIKE STYLE ===== */
+.duo-home {
+  background: linear-gradient(180deg, #eaf9ff 0%, #f6ffef 52%, #fffef5 100%);
+}
+
+.duo-home main {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 8% 18%,
+      rgba(255, 224, 110, 0.24),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 89% 7%,
+      rgba(120, 199, 255, 0.26),
+      transparent 30%
+    );
+}
+
+.duo-home .nav-island {
+  background: rgba(67, 167, 8, 0.72);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.duo-home .nav-island.scrolled {
+  background: rgba(51, 138, 0, 0.8);
+}
+
+.duo-home .hero {
+  position: relative;
+  overflow: hidden;
+  padding: 8.6rem 2rem 5rem;
+  border-bottom-left-radius: 36px;
+  border-bottom-right-radius: 36px;
+  box-shadow: inset 0 -10px 0 rgba(255, 255, 255, 0.2);
+}
+
+.duo-home .hero::before {
+  content: "";
+  position: absolute;
+  top: -95px;
+  right: 7%;
+  width: 240px;
+  height: 240px;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+}
+
+.duo-home .hero::after {
+  content: "";
+  position: absolute;
+  bottom: -75px;
+  left: 9%;
+  width: 170px;
+  height: 170px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.duo-home .hero-content p {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.duo-home .trainer-section {
+  max-width: 760px;
+  margin: 2rem auto 2rem;
+  background: var(--white);
+  border: 2px solid #d4edbc;
+  border-bottom-width: 6px;
+  border-radius: 28px;
+  padding: 2.2rem 1.6rem 2.4rem;
+  box-shadow: 0 14px 32px rgba(70, 163, 2, 0.12);
+}
+
+.duo-home .trainer-section h2 {
+  color: var(--dark-green);
+}
+
+.duo-home .level-path {
+  background: linear-gradient(180deg, #f8fff2 0%, #f1ffe5 100%);
+  border: 1px solid #deefcd;
+  border-radius: 20px;
+  padding: 2rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .duo-home .hero {
+    padding: 6.8rem 1.2rem 3.8rem;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+  }
+
+  .duo-home .hero::before,
+  .duo-home .hero::after {
+    display: none;
+  }
+
+  .duo-home .trainer-section {
+    max-width: none;
+    margin: 2rem 0.9rem 1.4rem;
+    border-radius: 22px;
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .duo-home .level-path {
+    padding: 1.5rem 0.6rem;
   }
 }

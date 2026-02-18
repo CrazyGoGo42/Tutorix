@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Local Ollama Web Prompt</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Local Ollama Web Prompt</h2>
+
+<div class="input-group">
+  <label for="question">Question:</label>
+  <input id="question" placeholder="Enter question">
+</div>
+
+<div class="input-group">
+  <label for="givenAnswer">Student's Answer:</label>
+  <input id="givenAnswer" placeholder="Enter student's answer">
+</div>
+
+<div class="input-group">
+  <label for="correctAnswer">Correct Answer:</label>
+  <input id="correctAnswer" placeholder="Enter correct answer">
+</div>
+
+<div class="input-group">
+  <label for="topic">Topic (optional):</label>
+  <input id="topic" placeholder="Enter topic">
+</div>
+
+<div class="input-group">
+  <label for="failCount">Fails:</label>
+  <input id="failCount" type="number" placeholder="Number of fails">
+</div>
+
+<div class="input-group">
+  <label for="difficulty">Difficulty:</label>
+  <select id="difficulty">
+    <option value="easy">Easy</option>
+    <option value="medium" selected>Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+</div>
+
+<div class="input-group">
+  <label for="teacherType">Teacher Type:</label>
+  <select id="teacherType">
+    <option value="math">Math</option>
+    <option value="science">Science</option>
+    <option value="history">History</option>
+  </select>
+</div>
+
+<div class="input-group">
+  <label for="teacherMood">Teacher Mood:</label>
+  <select id="teacherMood">
+    <option value="friendly" selected>Friendly</option>
+    <option value="strict">Strict</option>
+    <option value="funny">Funny</option>
+  </select>
+</div>
+
+<button onclick="sendPrompt()">Run</button>
+
+<pre id="output"></pre>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    /* Licht von oben links */
+    box-shadow:
+        8px 12px 20px rgba(0, 0, 0, 0.45),
+        inset -6px -6px 12px rgba(255,255,255,0.15);
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+

@@ -375,3 +375,20 @@ function resetStats() {
     updateStats();
 }
 
+
+
+// ===== 13. QUIZ =====
+function startQuiz() {
+    alert('Quiz kommt bald!');
+}
+
+// ===== 14. PDF =====
+function generatePDF() {
+    alert('PDF-Funktion kommt bald!');
+}
+function generateExercisePDF() {
+    alert('Übungsblatt-PDF kommt bald!');
+}
+function generateSolutionPDF() {
+    alert('Lösungsblatt-PDF kommt bald!');
+}

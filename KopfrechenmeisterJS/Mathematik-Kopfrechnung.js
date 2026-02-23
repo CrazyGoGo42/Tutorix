@@ -377,9 +377,15 @@ function resetStats() {
 
 
 
-// ===== 13. QUIZ =====
+// ===== 13. QUIZ (WEITERLEITUNG) =====
 function startQuiz() {
-    alert('Quiz kommt bald!');
+   if (!currentKlasse) {
+        alert('Bitte zuerst eine Klasse auswählen!');
+        return;
+    }
+    
+    // Zur Quiz-Seite weiterleiten mit ausgewählter Klasse
+    window.location.href = 'quiz.html?klasse=' + currentKlasse;
 }
 
 // ===== 14. PDF =====

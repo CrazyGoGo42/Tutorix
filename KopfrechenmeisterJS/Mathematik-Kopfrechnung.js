@@ -393,8 +393,17 @@ function generatePDF() {
     alert('PDF-Funktion kommt bald!');
 }
 function generateExercisePDF() {
-    alert('Übungsblatt-PDF kommt bald!');
+    if (!currentKlasse) {
+        alert('Bitte zuerst eine Klasse auswählen!');
+        return;
+    }
+    window.location.href = 'pdf.html';
 }
+
 function generateSolutionPDF() {
-    alert('Lösungsblatt-PDF kommt bald!');
+    if (!currentKlasse) {
+        alert('Bitte zuerst eine Klasse auswählen!');
+        return;
+    }
+    window.location.href = 'pdf.html';
 }

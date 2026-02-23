@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz - Kopfrechnen Meister</title>
+    <link rel="stylesheet" href="Mathematik-Kopfrechnung.css">
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <h1>🧮 Kopfrechnen Meister - Quiz</h1>
+            <ul class="nav-menu">
+                <li><a href="Mathematik-Kopfrechnung.html" class="nav-link">← Zurück zu Übungen</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hauptcontainer -->
+    <main class="main-container">
+        <!-- WILLKOMMENSBEREICH (wird zuerst angezeigt) -->
+        <div id="willkommen-container" class="quiz-willkommen">
+            <h2>🏆 Kopfrechen-Quiz</h2>
+            <p>Teste dein Wissen unter Zeitdruck!</p>
+            
+            <div class="quiz-info-box">
+                <h3>Das erwartet dich:</h3>
+                <ul>
+                    <li>10 gemischte Aufgaben</li>
+                    <li>15 Minuten Zeitlimit</li>
+                    <li>4 Antwortmöglichkeiten pro Frage</li>
+                    <li>Note von 1-6 am Ende</li>
+                </ul>
+            </div>
+            
+            <button onclick="quizWirklichStarten()" class="quiz-start-btn">
+                🚀 Quiz jetzt starten
+            </button>
+            
+            <p class="klasse-anzeige">
+                Für Klasse <span id="quiz-klasse-anzeige">1</span> vorbereitet
+            </p>
+        </div>
+
+        <!-- QUIZ BEREICH (anfangs versteckt) -->
+        <div id="quiz-container" style="display: none;">
+            <div class="quiz-container">
+                
+                <!-- Quiz Header -->
+                <div class="quiz-header">
+                    <h2>Klasse <span id="quiz-klasse">1</span> Quiz</h2>
+                    <div class="timer-display">
+                        ⏱️ <span id="quiz-timer">15:00</span>
+                    </div>
+                </div>
+
+                <!-- Fortschritt -->
+                <div class="progress-container">
+                    <div class="progress-stats">
+                        <span>Frage <span id="frage-aktuell">1</span>/<span id="frage-total">10</span></span>
+                        <span>Richtig: <span id="richtig-zaehler">0</span></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="fortschritt-balken" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <!-- Frage Bereich -->
+                <div id="frage-container" class="frage-container">
+                    <div class="frage-text" id="frage-text">5 + 3 = ?</div>
+                    
+                    <!-- Antwort Buttons -->
+                    <div class="antwort-container" id="antwort-container"></div>
+
+                    <!-- Feedback -->
+                    <div id="feedback" class="feedback"></div>
+                </div>
+
+                <!-- Ergebnis Bereich -->
+                <div id="ergebnis-container" class="ergebnis-container" style="display: none;">
+                    <h2>Quiz beendet! 🎉</h2>
+                    
+                    <div class="note-display" id="note-display">1</div>
+                    
+                    <div class="ergebnis-text">
+                        <span id="ergebnis-richtig">0</span> von 10 richtig
+                    </div>
+                    
+                    <div class="note-text" id="note-text">Ausgezeichnet!</div>
+                    
+                    <div class="ergebnis-buttons">
+                        <button onclick="neuesQuiz()" class="neues-quiz-btn">🔄 Neues Quiz</button>
+                        <button onclick="zurueckZuUebungen()" class="zurueck-btn">🏠 Zurück</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="quiz.js"></script>
+</body>
+</html>

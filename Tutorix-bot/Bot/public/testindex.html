@@ -1,70 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
+  <!-- Lightweight test page that simulates a simple exercise form. -->
   <meta charset="utf-8">
-  <title>Local Ollama Web Prompt</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bot Einbau Testseite</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <main class="demo-shell">
+    <h1>Test: Bestehende Lernseite</h1>
+    <p>Hier wird nur eine normale Aufgabe gezeigt. Der Bot wird per JS darueber gelegt.</p>
 
-<h2>Local Ollama Web Prompt</h2>
+    <form class="exercise-card">
+      <label class="field-label">Frage</label>
+      <p class="question">Was bedeutet "γεια σου"?</p>
 
-<div class="input-group">
-  <label for="question">Question:</label>
-  <input id="question" placeholder="Enter question">
-</div>
+      <label class="field-label" for="answer">Antwort</label>
+      <input id="answer" name="answer" placeholder="deine Antwort">
 
-<div class="input-group">
-  <label for="givenAnswer">Student's Answer:</label>
-  <input id="givenAnswer" placeholder="Enter student's answer">
-</div>
+      <input type="hidden" name="correctAnswer" value="Hallo">
+      <button type="submit">Pruefen</button>
+    </form>
+  </main>
 
-<div class="input-group">
-  <label for="correctAnswer">Correct Answer:</label>
-  <input id="correctAnswer" placeholder="Enter correct answer">
-</div>
-
-<div class="input-group">
-  <label for="topic">Topic (optional):</label>
-  <input id="topic" placeholder="Enter topic">
-</div>
-
-<div class="input-group">
-  <label for="failCount">Fails:</label>
-  <input id="failCount" type="number" placeholder="Number of fails">
-</div>
-
-<div class="input-group">
-  <label for="difficulty">Difficulty:</label>
-  <select id="difficulty">
-    <option value="easy">Easy</option>
-    <option value="medium" selected>Medium</option>
-    <option value="hard">Hard</option>
-  </select>
-</div>
-
-<div class="input-group">
-  <label for="teacherType">Teacher Type:</label>
-  <select id="teacherType">
-    <option value="math">Math</option>
-    <option value="science">Science</option>
-    <option value="history">History</option>
-  </select>
-</div>
-
-<div class="input-group">
-  <label for="teacherMood">Teacher Mood:</label>
-  <select id="teacherMood">
-    <option value="friendly" selected>Friendly</option>
-    <option value="strict">Strict</option>
-    <option value="funny">Funny</option>
-  </select>
-</div>
-
-<button onclick="sendPrompt()">Run</button>
-
-<pre id="output"></pre>
-
-<script src="script.js"></script>
+  <script src="testscript.js"></script>
 </body>
 </html>

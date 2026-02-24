@@ -1,102 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
+  <!-- Main demo page used by the local bot server. -->
   <meta charset="UTF-8">
-  <title>Local Ollama Web Prompt</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorix</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <nav class="nav-island">
+    <a href="#" class="nav-logo">Tutorix</a>
+    <ul class="nav-menu">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#mathe" class="nav-link">Mathe</a></li>
+      <li><a href="#sprache" class="nav-link">Trainer</a></li>
+    </ul>
+  </nav>
 
-  <div class="app">
-    <!-- TASK PANEL -->
-    <section class="task-panel">
-      <h2>Task</h2>
-      
-      <div class="input-group">
-        <label for="question">Question:</label>
-        <input id="question" placeholder="Enter question">
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Lerne schlauer, nicht haerter</h1>
+        <p>Dein persoenlicher Lernbegleiter fuer jedes Fach</p>
       </div>
-
-      <div class="input-group">
-        <label for="givenAnswer">Student's Answer:</label>
-        <input id="givenAnswer" placeholder="Enter student's answer">
-      </div>
-
-      <div class="input-group">
-        <label for="correctAnswer">Correct Answer:</label>
-        <input id="correctAnswer" placeholder="Enter correct answer">
-      </div>
-
-      <div class="input-group">
-        <label for="topic">Topic (optional):</label>
-        <input id="topic" placeholder="Enter topic">
-      </div>
-
-      <div class="input-group">
-        <label for="failCount">Fails:</label>
-        <input id="failCount" type="number" placeholder="Number of fails">
-      </div>
-
-      <div class="input-group">
-        <label for="teacherType">Teacher Type:</label>
-        <select id="teacherType">
-          <option value="math">Math</option>
-          <option value="science">Science</option>
-          <option value="history">History</option>
-        </select>
-      </div>
-
-      <div class="input-group">
-        <label for="teacherMood">Teacher Mood:</label>
-        <select id="teacherMood">
-          <option value="friendly" selected>Friendly</option>
-          <option value="strict">Strict</option>
-          <option value="funny">Funny</option>
-        </select>
-      </div>
-
-      <button class="run-btn" onclick="sendPrompt()">Generate AI Response</button>
     </section>
 
-    <!-- AI PANEL -->
-    <section class="ai-panel">
-      <div class="ai-header">
-        <canvas id="avatarCanvas" class="avatar"></canvas>
+    <section class="subject-section" id="mathe">
+      <div class="subject-content">
+        <h2>Mathe</h2>
+        <p>Kopfrechnen und Uebungen</p>
       </div>
-      <div class="ai-bubble" id="aiBubble">
-        AI ready.<br>
-      </div>
-      <button class="gear-btn" onclick="openSettings()">⚙</button>
     </section>
-  </div>
 
-  <!-- SETTINGS MODAL -->
-  <div class="overlay" id="settingsOverlay">
-    <div class="settings-box">
-      <div class="settings-header">
-        <h3>Teacher Settings</h3>
-        <button onclick="openSettings()">✖</button>
+    <section class="subject-section green" id="sprache">
+      <div class="subject-content">
+        <h2>Sprachen</h2>
+        <p>Trainer im Duolingo-Stil</p>
       </div>
+    </section>
 
-      <label>Avatar Color</label>
-      <div class="color-buttons">
-        <button class="color-btn" data-color1="#0066ff" data-color2="#00ccff" style="background: linear-gradient(135deg, #0066ff, #00ccff);" title="Blau">Blau</button>
-        <button class="color-btn" data-color1="#ffcc00" data-color2="#ff6600" style="background: linear-gradient(135deg, #ffcc00, #ff6600);" title="Gelb">Gelb</button>
-        <button class="color-btn" data-color1="#00ff66" data-color2="#00cc99" style="background: linear-gradient(135deg, #00ff66, #00cc99);" title="Grün">Grün</button>
-        <button class="color-btn" data-color1="#ff0033" data-color2="#cc0066" style="background: linear-gradient(135deg, #ff0033, #cc0066);" title="Rot">Rot</button>
-      </div>
+    <section class="exercise-wrap">
+      <h3>Beispiel-Aufgabe</h3>
+      <form class="exercise-card" id="exerciseForm">
+        <label class="field-label" for="questionInput">Frage</label>
+        <p class="question">Was ist die Vergangenheit von "go"?</p>
 
-      <label>Teacher Mood</label>
-      <select id="settingsMood">
-        <option value="friendly">Friendly</option>
-        <option value="strict">Strict</option>
-        <option value="funny">Funny</option>
-      </select>
+        <label class="field-label" for="answerInput">Deine Antwort</label>
+        <input id="answerInput" name="answer" placeholder="z.B. goed / went">
 
-      <button class="save-btn" onclick="saveSettings()">Save</button>
-    </div>
-  </div>
+        <input type="hidden" name="correctAnswer" value="went">
+        <button type="submit">Pruefen</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Tutorix Demo Bot</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>

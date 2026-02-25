@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Generator - Kopfrechnen Meister</title>
+    <link rel="stylesheet" href="Mathematik-Kopfrechnung.css">
+    <link rel="stylesheet" href="pdf.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <h1>🧮 Kopfrechnen Meister - PDF Generator</h1>
+            <ul class="nav-menu">
+                <li><a href="Mathematik-Kopfrechnung.html" class="nav-link">← Zurück zu Übungen</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hauptcontainer -->
+    <main class="main-container">
+        <!-- WILLKOMMENSBEREICH -->
+        <div id="willkommen-container" class="pdf-willkommen">
+            <h2>📄 PDF Arbeitsblätter</h2>
+            <p>Erstelle eigene Übungsblätter zum Ausdrucken!</p>
+            
+            <div class="pdf-auswahl-box">
+                <h3>Einstellungen:</h3>
+                
+                <!-- Klassenauswahl -->
+                <div class="auswahl-gruppe">
+                    <label for="pdf-klasse">Klasse wählen:</label>
+                    <select id="pdf-klasse" class="pdf-select">
+                        <option value="1">Klasse 1</option>
+                        <option value="2">Klasse 2</option>
+                        <option value="3">Klasse 3</option>
+                        <option value="4">Klasse 4</option>
+                        <option value="5">Klasse 5</option>
+                    </select>
+                </div>
+                
+                <!-- Anzahl der Aufgaben -->
+                <div class="auswahl-gruppe">
+                    <label for="aufgaben-anzahl">Anzahl Aufgaben:</label>
+                    <select id="aufgaben-anzahl" class="pdf-select">
+                        <option value="5">5 Aufgaben</option>
+                        <option value="10" selected>10 Aufgaben</option>
+                        <option value="15">15 Aufgaben</option>
+                        <option value="20">20 Aufgaben</option>
+                    </select>
+                </div>
+                
+                <!-- Schwierigkeitsgrad -->
+                <div class="auswahl-gruppe">
+                    <label for="schwierigkeit">Schwierigkeit:</label>
+                    <select id="schwierigkeit" class="pdf-select">
+                        <option value="leicht">Leicht</option>
+                        <option value="mittel" selected>Mittel</option>
+                        <option value="schwer">Schwer</option>
+                    </select>
+                </div>
+                
+                <!-- Aufgaben-Typen -->
+                <div class="aufgaben-typen">
+                    <h4>Aufgaben-Typen:</h4>
+                    <label><input type="checkbox" id="typ-plus" checked> Addition (+)</label><br>
+                    <label><input type="checkbox" id="typ-minus" checked> Subtraktion (−)</label><br>
+                    <label><input type="checkbox" id="typ-mal" checked> Multiplikation (×)</label><br>
+                    <label><input type="checkbox" id="typ-geteilt"> Division (÷) - ab Klasse 3</label>
+                </div>
+                
+                <!-- PDF Buttons -->
+                <div class="pdf-button-gruppe">
+                    <button onclick="pdfVorschauAnzeigen()" class="pdf-vorschau-btn">
+                        👁️ Vorschau anzeigen
+                    </button>
+                    
+                    <button onclick="pdfErstellen('uebungen')" class="pdf-erstellen-btn">
+                        📥 Übungsblatt PDF
+                    </button>
+                    
+                    <button onclick="pdfErstellen('loesungen')" class="pdf-loesung-btn">
+                        📥 Lösungsblatt PDF
+                    </button>
+                </div>
+            </div>
+            
+            <p class="hinweis">
+                <small>Hinweis: PDF wird im Browser geöffnet. Du kannst es dann speichern oder drucken.</small>
+            </p>
+        </div>
+
+        <!-- VORSCHAU BEREICH (anfangs versteckt) -->
+        <div id="vorschau-container" class="vorschau-container" style="display: none;">
+            <div class="vorschau-header">
+                <h3>Vorschau der Aufgaben</h3>
+                <button onclick="vorschauSchliessen()" class="schliessen-btn">✕</button>
+            </div>
+            
+            <div id="vorschau-aufgaben" class="vorschau-aufgaben">
+                <!-- Aufgaben werden hier eingefügt -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="pdf.js"></script>
+</body>
+</html>

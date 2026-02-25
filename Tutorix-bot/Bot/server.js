@@ -104,7 +104,6 @@ No line breaks.
 No explanation.
 Feedback must match this persona exactly.
 Keep it constructive.
-Make the answers as offensive and hurtful as possible.
 `;
 
   try {

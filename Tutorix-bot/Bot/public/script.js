@@ -14,6 +14,8 @@
   let activeTeacher = null;
   let botBaseUrl = window.location.origin;
   let avatarAnimId = null;
+  let inFlightController = null;
+  let inFlightSignature = "";
 
   // Bootstrap: inject styles, build UI, then load teacher profiles.
   // Order matters:
@@ -187,6 +189,13 @@
 
     document.addEventListener("submit", function (event) {
       if (!settings.autoDetect) return;
+      // Only react to explicit "check/prüfen" submits.
+      let submitter = event.submitter || null;
+      if (submitter && submitter.disabled) return;
+      if (submitter) {
+        let submitTxt = ((submitter.textContent || "") + " " + (submitter.value || "")).toLowerCase();
+        if (!/submit|pruef|prüf|check/.test(submitTxt)) return;
+      }
       // First run catches instant DOM state.
       analyze(event.target);
       // Second run catches async UI updates after submit handlers.
@@ -197,8 +206,14 @@
       if (!settings.autoDetect) return;
       let target = event.target.closest("button,input[type='submit']");
       if (!target) return;
+      if (target.disabled) return;
       let txt = ((target.textContent || "") + " " + (target.value || "")).toLowerCase();
-      if (target.type !== "submit" && !/submit|pruef|prüf|check|weiter|answer|ok/.test(txt)) return;
+      // If user moves to next task, stop any stale response immediately.
+      if (/weiter|next|continue/.test(txt)) {
+        cancelInFlightRequest();
+        return;
+      }
+      if (target.type !== "submit" && !/submit|pruef|prüf|check/.test(txt)) return;
       // Prefer closest task container to avoid mixing data from whole page.
       let src = target.closest(".task-item") || target.closest("form") || target.closest(".quiz-content") || target.parentElement;
       if (!src) return;
@@ -305,6 +320,10 @@
 
   // Read the student's current answer from known quiz/task input patterns.
   function readGivenAnswer(scope) {
+    // Trainer level 6 uses a dedicated free-text field (#quizInput/.quiz-input).
+    let trainerInput = scope.querySelector("#quizInput, input.quiz-input");
+    if (trainerInput && clean(trainerInput.value)) return clean(trainerInput.value);
+
     // Prioritize local task input so we do not read unrelated fields.
     let taskScope = scope.closest(".task-item") || scope.querySelector(".task-item");
     if (taskScope) {
@@ -357,13 +376,24 @@
 
   // Send payload to backend and display the short AI response in the popup.
   function sendPrompt(payload) {
+    let signature = buildPayloadSignature(payload);
+    // Skip duplicate in-flight requests (e.g. submit + delayed submit pass).
+    if (inFlightController && inFlightSignature === signature) return;
+    // New task/answer: cancel old generation to avoid stale output.
+    if (inFlightController && inFlightSignature !== signature) cancelInFlightRequest();
+
+    inFlightSignature = signature;
+    inFlightController = new AbortController();
+    let controller = inFlightController;
+
     // Visual "thinking" state while waiting for backend.
     setText("...");
     // POST payload as JSON to local backend.
     fetch(botBaseUrl + "/prompt", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: controller.signal
     })
       .then(function (res) {
         // Convert non-2xx status to rejected promise.
@@ -372,13 +402,43 @@
         return res.json();
       })
       .then(function (data) {
+        // Ignore stale completions from superseded requests.
+        if (controller !== inFlightController) return;
         // Keep UI stable even if backend returns empty content.
         setText((data.output || "Keine Antwort").trim());
       })
-      .catch(function () {
+      .catch(function (err) {
+        // Request was intentionally cancelled (new task/answer).
+        if (err && err.name === "AbortError") return;
+        if (controller !== inFlightController) return;
         // Generic fallback for network/backend/model errors.
         setText("Keine AI-Antwort.");
+      })
+      .finally(function () {
+        if (controller !== inFlightController) return;
+        inFlightController = null;
+        inFlightSignature = "";
       });
+  }
+
+  // Cancel currently running backend generation.
+  function cancelInFlightRequest() {
+    if (!inFlightController) return;
+    inFlightController.abort();
+    inFlightController = null;
+    inFlightSignature = "";
+    setText("Abgebrochen (naechste Aufgabe erkannt).");
+  }
+
+  // Stable key so we can dedupe/cancel by current task state.
+  function buildPayloadSignature(payload) {
+    return [
+      window.location.pathname,
+      norm(payload.question),
+      norm(payload.givenAnswer),
+      norm(payload.correctAnswer),
+      String(payload.failCount || 0)
+    ].join("|");
   }
 
   // Seeded Perlin-style noise generator used for animated avatar texture.

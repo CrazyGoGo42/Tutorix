@@ -516,6 +516,37 @@ main {
   background: #ffe5e5;
 }
 
+.quiz-input-container {
+  margin-bottom: 2rem;
+}
+
+.quiz-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--medium-gray);
+  border-radius: 12px;
+  background: var(--white);
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.quiz-input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px var(--very-light-green);
+}
+
+.quiz-input.correct {
+  border-color: var(--primary-green);
+  background: var(--very-light-green);
+}
+
+.quiz-input.wrong {
+  border-color: #ff4b4b;
+  background: #ffe5e5;
+}
+
 .quiz-check-btn {
   padding: 1rem;
   background: var(--primary-green);

@@ -104,6 +104,18 @@ const vocabulary = {
     { gr: "πόλη", de: "Stadt" },
     { gr: "χωριό", de: "Dorf" },
   ],
+  6: [
+    { gr: "δουλειά", de: "Arbeit" },
+    { gr: "γραφείο", de: "Büro" },
+    { gr: "υπολογιστής", de: "Computer" },
+    { gr: "συνάδελφος", de: "Kollege" },
+    { gr: "αφεντικό", de: "Chef" },
+    { gr: "συνάντηση", de: "Meeting" },
+    { gr: "μισθός", de: "Gehalt" },
+    { gr: "διακοπές", de: "Urlaub" },
+    { gr: "έργο", de: "Projekt" },
+    { gr: "επιτυχία", de: "Erfolg" },
+  ],
   // Weitere Level... #TODO!
 };
 // #endregion
@@ -320,17 +332,26 @@ function generateQuestions(level) {
   const questions = [];
 
   words.forEach((word) => {
-    // Griechisch -> Deutsch
-    const wrongAnswers = shuffleArray(words.filter((w) => w.de !== word.de))
-      .slice(0, 3)
-      .map((w) => w.de);
+    // Level 6: Input-Fragen (Wort eintippen)
+    if (level.id === 6) {
+      questions.push({
+        type: "input",
+        question: `Übersetze "${word.gr}" auf Deutsch:`,
+        correct: word.de,
+      });
+    } else {
+      // Andere Level: Multiple Choice
+      const wrongAnswers = shuffleArray(words.filter((w) => w.de !== word.de))
+        .slice(0, 3)
+        .map((w) => w.de);
 
-    questions.push({
-      type: "translate",
-      question: `Was bedeutet "${word.gr}"?`,
-      correct: word.de,
-      options: shuffleArray([word.de, ...wrongAnswers]),
-    });
+      questions.push({
+        type: "translate",
+        question: `Was bedeutet "${word.gr}"?`,
+        correct: word.de,
+        options: shuffleArray([word.de, ...wrongAnswers]),
+      });
+    }
   });
 
   return shuffleArray(questions);
@@ -368,36 +389,67 @@ function showQuestion() {
 
   const question = currentQuiz.questions[currentQuiz.currentIndex];
 
-  quizContent.innerHTML = `
-    <p class="quiz-question">${question.question}</p>
-    <div class="quiz-options">
-      ${question.options
-        .map(
-          (option, i) => `
-        <button class="quiz-option" data-answer="${option}">${option}</button>
-      `,
-        )
-        .join("")}
-    </div>
-    <button class="quiz-check-btn" id="checkAnswer" disabled>Prüfen</button>
-  `;
+  // Input-Fragen (Level 6)
+  if (question.type === "input") {
+    quizContent.innerHTML = `
+      <p class="quiz-question">${question.question}</p>
+      <div class="quiz-input-container">
+        <input type="text" class="quiz-input" id="quizInput" placeholder="Deine Antwort..." autocomplete="off">
+      </div>
+      <button class="quiz-check-btn" id="checkAnswer" disabled>Prüfen</button>
+    `;
 
-  const options = quizContent.querySelectorAll(".quiz-option");
-  const checkBtn = quizContent.querySelector("#checkAnswer");
-  let selectedAnswer = null;
+    const inputField = quizContent.querySelector("#quizInput");
+    const checkBtn = quizContent.querySelector("#checkAnswer");
 
-  options.forEach((option) => {
-    option.addEventListener("click", () => {
-      options.forEach((o) => o.classList.remove("selected"));
-      option.classList.add("selected");
-      selectedAnswer = option.dataset.answer;
-      checkBtn.disabled = false;
+    inputField.addEventListener("input", () => {
+      checkBtn.disabled = inputField.value.trim() === "";
     });
-  });
 
-  checkBtn.addEventListener("click", () => {
-    checkAnswer(selectedAnswer, question.correct, options);
-  });
+    inputField.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" && inputField.value.trim() !== "") {
+        checkInputAnswer(inputField.value.trim(), question.correct);
+      }
+    });
+
+    checkBtn.addEventListener("click", () => {
+      checkInputAnswer(inputField.value.trim(), question.correct);
+    });
+
+    inputField.focus();
+  } else {
+    // Multiple Choice Fragen
+    quizContent.innerHTML = `
+      <p class="quiz-question">${question.question}</p>
+      <div class="quiz-options">
+        ${question.options
+          .map(
+            (option, i) => `
+          <button class="quiz-option" data-answer="${option}">${option}</button>
+        `,
+          )
+          .join("")}
+      </div>
+      <button class="quiz-check-btn" id="checkAnswer" disabled>Prüfen</button>
+    `;
+
+    const options = quizContent.querySelectorAll(".quiz-option");
+    const checkBtn = quizContent.querySelector("#checkAnswer");
+    let selectedAnswer = null;
+
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        options.forEach((o) => o.classList.remove("selected"));
+        option.classList.add("selected");
+        selectedAnswer = option.dataset.answer;
+        checkBtn.disabled = false;
+      });
+    });
+
+    checkBtn.addEventListener("click", () => {
+      checkAnswer(selectedAnswer, question.correct, options);
+    });
+  }
 }
 
 function checkAnswer(selected, correct, options) {
@@ -415,6 +467,28 @@ function checkAnswer(selected, correct, options) {
   if (isCorrect) {
     currentQuiz.correctAnswers++;
   } else {
+    currentQuiz.hearts--;
+    updateQuizUI();
+  }
+
+  showFeedback(isCorrect, isCorrect ? null : correct);
+}
+
+function checkInputAnswer(userInput, correct) {
+  // Case-insensitive comparison
+  const isCorrect = userInput.toLowerCase() === correct.toLowerCase();
+
+  const inputField = quizContent.querySelector("#quizInput");
+  const checkBtn = quizContent.querySelector("#checkAnswer");
+
+  inputField.disabled = true;
+  checkBtn.disabled = true;
+
+  if (isCorrect) {
+    inputField.classList.add("correct");
+    currentQuiz.correctAnswers++;
+  } else {
+    inputField.classList.add("wrong");
     currentQuiz.hearts--;
     updateQuizUI();
   }

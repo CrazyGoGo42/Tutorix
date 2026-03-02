@@ -8,8 +8,8 @@
 Tutorix ist eine lokale Lernplattform, die wir als Schulprojekt entwickelt haben. Sie besteht aus zwei Lernmodulen und einem KI-Assistenten, der beim Ueben Feedback gibt.
 
 **Team**
-Alloufi Tasnim 
-Daniel Fast
+Alloufi Tasnim, 
+Daniel Fast,
 Joline Elizabeth Panagiotaris
 
 ## Was steckt drin

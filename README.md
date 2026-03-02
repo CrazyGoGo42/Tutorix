@@ -17,7 +17,7 @@ Tutorix ist eine lokale Lernplattform, die wir als Schulprojekt entwickelt haben
 
 ## Installation
 
-Das Programm laeuft unter Windows. Zum Starten einfach zuerst `install.bat` ausfuehren. Das Skript prueft ob Node.js, Git und Ollama installiert sind und holt sie bei Bedarf automatisch nach. Ausserdem laedt es das KI-Modell herunter, was beim ersten Mal ein paar Minuten dauern kann.
+Das Programm laeuft unter Windows. Zum Starten einfach zuerst `install.bat` ausfuehren. Das Skript prueft ob Node.js, Git und Ollama installiert sind und holt sie bei Bedarf automatisch nach. Ausserdem laedt es das KI-Modell herunter, was beim ersten Mal ein paar Minuten dauern kann. Falls die `start.bat` nicht funktioniert muss man in cmd im datepfad `Tutorix-bot/Bot/` und dann den Befehl `node server.js` ausfuehren.
 
 Danach genuegt ein Doppelklick auf `start.bat`. Der Server startet und die Startseite oeffnet sich im Browser unter `http://localhost:3000`.
 

@@ -7,6 +7,11 @@
 
 Tutorix ist eine lokale Lernplattform, die wir als Schulprojekt entwickelt haben. Sie besteht aus zwei Lernmodulen und einem KI-Assistenten, der beim Ueben Feedback gibt.
 
+**Team**
+Alloufi Tasnim 
+Daniel Fast
+Joline Elizabeth Panagiotaris
+
 ## Was steckt drin
 
 **Kopfrechenmeister** ist ein Mathematiktrainer fuer die Klassen 1 bis 5. Nach der Klassenwahl werden zufaellige Aufgaben generiert, die zum jeweiligen Niveau passen. Man gibt die Antwort ein, klickt auf "Pruefen" und bekommt sofort Rueckmeldung. Wer es etwas geordneter mag, kann einen 15-Minuten-Quiz starten, der am Ende eine Note gibt. Ausserdem lassen sich fertige Aufgabenblaetter als PDF herunterladen.
